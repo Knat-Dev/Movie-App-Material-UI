@@ -7,7 +7,8 @@ import {
   Typography,
   IconButton,
   Badge,
-  createMuiTheme
+  createMuiTheme,
+  Tooltip
 } from "@material-ui/core";
 import {
   Brightness7Rounded,
@@ -30,8 +31,22 @@ const useStyles = makeStyles(theme => ({
 export default function Nav() {
   const [movies, setMovies] = useContext(MovieContext);
   const [theme, setTheme] = useContext(ThemeContext);
-
   const classes = useStyles();
+
+  const handleToggleTheme = () => {
+    setTheme(
+      createMuiTheme({
+        ...theme,
+        palette: {
+          primary: {
+            main: purple[800]
+          },
+          secondary: { main: pink["A400"] },
+          type: theme.palette.type === "dark" ? "light" : "dark"
+        }
+      })
+    );
+  };
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -39,36 +54,26 @@ export default function Nav() {
           <Typography className={classes.title} variant="h5">
             Knat Dev
           </Typography>
+
           <IconButton aria-label="cart" className={classes.root}>
             <Badge badgeContent={movies.length} color="secondary">
               <TheatersIcon />
             </Badge>
           </IconButton>
 
-          <IconButton
-            onClick={() => {
-              setTheme(
-                createMuiTheme({
-                  ...theme,
-                  palette: {
-                    primary: {
-                      main: purple[800]
-                    },
-                    secondary: { main: pink["A400"] },
-                    type: theme.palette.type === "dark" ? "light" : "dark"
-                  }
-                })
-              );
-            }}
-            aria-label="cart"
-            className={classes.root}
-          >
-            {theme.palette.type === "dark" ? (
-              <Brightness4Rounded />
-            ) : (
-              <Brightness7Rounded />
-            )}
-          </IconButton>
+          <Tooltip title="Toggle Light/Dark Theme">
+            <IconButton
+              onClick={handleToggleTheme}
+              aria-label="cart"
+              className={classes.root}
+            >
+              {theme.palette.type === "dark" ? (
+                <Brightness4Rounded />
+              ) : (
+                <Brightness7Rounded />
+              )}
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
     </div>
