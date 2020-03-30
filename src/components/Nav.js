@@ -21,15 +21,18 @@ import { purple, pink } from "@material-ui/core/colors";
 const useStyles = makeStyles(theme => ({
   root: {
     transition: "0.3s ease",
-    color: "white"
+    marginBottom: "2rem"
   },
   title: {
     flexGrow: 1
+  },
+  navItem: {
+    color: "white"
   }
 }));
 
 export default function Nav() {
-  const [movies, setMovies] = useContext(MovieContext);
+  const [movies] = useContext(MovieContext);
   const [theme, setTheme] = useContext(ThemeContext);
   const classes = useStyles();
 
@@ -55,7 +58,7 @@ export default function Nav() {
             Knat Dev
           </Typography>
 
-          <IconButton aria-label="cart" className={classes.root}>
+          <IconButton aria-label="cart" className={classes.navItem}>
             <Badge badgeContent={movies.length} color="secondary">
               <TheatersIcon />
             </Badge>
@@ -63,9 +66,9 @@ export default function Nav() {
 
           <Tooltip title="Toggle Light/Dark Theme">
             <IconButton
+              className={classes.navItem}
               onClick={handleToggleTheme}
               aria-label="cart"
-              className={classes.root}
             >
               {theme.palette.type === "dark" ? (
                 <Brightness4Rounded />

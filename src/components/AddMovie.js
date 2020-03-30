@@ -6,7 +6,7 @@ export default function AddMovie() {
     name: "",
     price: ""
   });
-  const [movies, setMovies] = useContext(MovieContext);
+  const [, setMovies] = useContext(MovieContext);
 
   const handleChange = e => {
     setState({ ...state, [e.target.name]: e.target.value });

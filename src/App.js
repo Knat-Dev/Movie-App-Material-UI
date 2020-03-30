@@ -4,9 +4,7 @@ import MovieList from "./components/MovieList";
 import Nav from "./components/Nav";
 import { MovieProvider } from "./components/MovieContext";
 import AddMovie from "./components/AddMovie";
-import { createMuiTheme, CssBaseline, Button } from "@material-ui/core";
-import { purple, blue } from "@material-ui/core/colors";
-import { useState } from "react";
+import { CssBaseline, Container } from "@material-ui/core";
 import { ThemeProvider } from "./components/ThemeProvider";
 
 function App() {
@@ -15,8 +13,10 @@ function App() {
       <MovieProvider>
         <CssBaseline />
         <Nav />
-        <MovieList />
-        <AddMovie />
+        <Container>
+          <MovieList />
+          <AddMovie />
+        </Container>
       </MovieProvider>
     </ThemeProvider>
   );
